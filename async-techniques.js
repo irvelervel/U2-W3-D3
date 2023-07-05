@@ -41,4 +41,36 @@ let startWithCallback = function () {
   })
 }
 
-startWithCallback()
+// startWithCallback()
+
+// SOLUZIONE 2) approccio con una PROMISE
+let countUntilThreeWithPromise = function () {
+  return new Promise((resolve, reject) => {
+    // corpo delle Promise
+    console.log('conto fino a 3...')
+    if (5 > 10) {
+      // caso impossibile, ma è solo un esempio...
+      reject('errore brutto brutto')
+    }
+    setTimeout(() => {
+      // operazione finita bene! risolvo la Promise
+      //   dati finti che recupero da un server
+      const result = { pippo: 'pluto' }
+      resolve(result)
+    }, 3000)
+  })
+}
+
+countUntilThreeWithPromise()
+  .then((r) => {
+    // questo codice verrà eseguito se la Promise è stata RISOLTA (se ha lanciato resolve())
+    console.log('FINITO!', r)
+    // il .then() aspetterà che la Promise venga risolta!
+  })
+  .catch((err) => {
+    // questo codice verrà eseguito se la Promise è stata RIFIUTATA (se ha lanciato reject())
+    console.log(err)
+  })
+
+// i parametri di resolve faranno riferimento a then
+// i parametri di reject fanno riferimento a catch
